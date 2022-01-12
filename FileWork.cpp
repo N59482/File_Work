@@ -3,60 +3,43 @@
 #include <string>
 using namespace std;
 
-void s(int *pa)
-{
-(*pa) +=100;
-cout<<"CODE:"<<(*pa)<<endl<<endl;
-}
- 
 int main()
-{
-int quan, a=0;
-char ch;
-string word;
-s(&a); //1
-
-ifstream fin;
-s(&a); //2
-
-fin.open("OutFile.txt");
-s(&a); //3
-
-  if (!fin.is_open())
   {
-    a++;
-    s(&a); //401
+    int quan, a=0;
+    char ch;
+    string word;
+    ifstream file;
+
+    file.open("OutFile.txt");//добавить trycatch
+
+    if (!file.is_open())
+      {
+        cout<<"Не удалось открыть файл"<<endl;
+        return 0;
+      }
+      else
+      {
+        while (file.get(ch)) // метод считывания посимвольно 
+          {
+            cout<<ch;
+          };
+
+        while(!file.eof())// считывание по слову
+          {
+            word = "";
+            file>>word;
+            cout<<word<<endl;
+          };
+
+        while(!file.eof())// считывание построчно.
+          {    
+            getline(file,word);
+            cout<<word<<endl;
+          };  
+      }
+    
+    file.close();
     return 0;
   }
-  else
-  {
-    s(&a); /* 4
-     метод считывания посимвольно 
-    while (fin.get(ch))
-    {
-     cout<< ch;
-    } 
-   // fin.get
-
-    считывание пословно)
-    while(!fin.eof())
-    {
-     word = "";
-     fin >> word;
-     cout << word << endl;
-    }
-    */
-
-    // считывание построчно.
-    while(!fin.eof())
-    {    
-      getline(fin,word);
-      cout<<word<<endl;
-    }  
-    cout<<"\nDone)\n";
-  }
-fin.close();
-return 0;
-}
 
 
